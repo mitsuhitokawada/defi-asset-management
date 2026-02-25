@@ -110,11 +110,51 @@ body {
 }
 
 /* ============================================================
+   TAB SWITCHER
+   ============================================================ */
+.page-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #0A0A0E;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 80px;
+  gap: 0;
+}
+.page-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 20px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(255,255,255,0.45);
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.page-tab:hover { color: rgba(255,255,255,0.8); }
+.page-tab.active {
+  color: #FFFFFF;
+  border-bottom-color: #CD0101;
+}
+.page-tab-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+}
+
+/* ============================================================
    NAVIGATION
    ============================================================ */
 nav {
   position: fixed;
-  top: 0;
+  top: 36px;
   left: 0;
   right: 0;
   z-index: 100;
@@ -189,7 +229,7 @@ nav {
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  padding-top: 64px;
+  padding-top: 100px; /* 36px tabs + 64px nav */
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
@@ -855,6 +895,16 @@ footer {
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     TAB SWITCHER
+     ============================================================ -->
+<div class="page-tabs">
+  <a href="defi-asset-management-ecosystem.html" class="page-tab active">信託銀行の視点</a>
+  <div class="page-tab-sep"></div>
+  <a href="defi-am-company.html" class="page-tab">委託会社（運用会社）の視点</a>
+</div>
+
 
 <!-- ============================================================
      NAVIGATION

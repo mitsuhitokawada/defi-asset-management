@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi × 委託会社（運用会社）の視点 | Future Finance</title>
+<style>
+/* ============================================================
+   NOMURA-STYLE DESIGN SYSTEM — LIGHT / ASSET MANAGER EDITION
+   Primary:   #1050A0  (Asset Manager Blue)
+   BG:        #FFFFFF  (White)
+   Alt BG:    #F7F7F7  (Light Gray)
+   Mid BG:    #F2F2F2
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --blue:        #1050A0;
+  --blue-hover:  #0C3E80;
+  --blue-light:  rgba(16,80,160,0.07);
+  --blue-border: rgba(16,80,160,0.28);
+  --bg:          #FFFFFF;
+  --navy:        #F7F7F7;
+  --mid:         #F2F2F2;
+  --card:        #FFFFFF;
+  --border:      rgba(0,0,0,0.08);
+  --text-1:      #0A0A0E;
+  --text-2:      #4B5563;
+  --text-3:      #9CA3AF;
+  --serif:       'EB Garamond', 'Noto Serif JP', 'Times New Roman', serif;
+  --sans:        'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text-1);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   TAB SWITCHER
+   ============================================================ */
+.page-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #0A0A0E;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 80px;
+  gap: 0;
+}
+
+.page-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 20px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(255,255,255,0.45);
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.page-tab:hover { color: rgba(255,255,255,0.8); }
+
+.page-tab.active {
+  color: #FFFFFF;
+  border-bottom-color: #1050A0;
+}
+
+.page-tab-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+}
+
+/* ============================================================
+   GLOBAL ELEMENTS
+   ============================================================ */
+.container { max-width: 1440px; margin: 0 auto; padding: 0 60px; }
+
+.blue-line {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--blue);
+  margin-bottom: 20px;
+}
+
+.section-eyebrow {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--text-1);
+  line-height: 1.3;
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+}
+
+.section-body {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.8;
+  padding-top: 48px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin: 3px 3px 3px 0;
+}
+
+.tag-blue {
+  color: var(--blue);
+  border-color: var(--blue-border);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 36px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--blue);
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 60% 100%, 0 100%);
+}
+.nav-logo-text {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: #0A0A0E;
+  letter-spacing: 1px;
+}
+.nav-logo-sub {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #4B5563;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-date {
+  font-size: 11px;
+  color: #9CA3AF;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: #F7F7F7;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding-top: 100px; /* 36px tabs + 64px nav */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(247,247,247,0) 40%, rgba(247,247,247,0.8) 80%, #F7F7F7 100%),
+    linear-gradient(135deg, rgba(16,80,160,0.04) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.04) 0px,
+      rgba(0,0,0,0.04) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.04) 0px,
+      rgba(0,0,0,0.04) 1px,
+      transparent 1px,
+      transparent 80px
+    );
+}
+
+.hero-label {
+  position: absolute;
+  top: 120px;
+  right: 80px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 80px 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-left: 2px solid var(--blue);
+  padding-left: 12px;
+  margin-bottom: 32px;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+  color: #0A0A0E;
+  margin-bottom: 24px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: rgba(10,10,14,0.38);
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 48px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0A0A0E;
+  text-decoration: none;
+  border-bottom: 1px solid var(--blue);
+  padding-bottom: 4px;
+  transition: gap 0.2s;
+}
+.hero-cta:hover { gap: 18px; }
+.hero-cta::after { content: '→'; color: var(--blue); }
+
+.hero-stats {
+  position: absolute;
+  right: 80px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 2;
+}
+.hero-stat-item {
+  text-align: right;
+  border-right: 2px solid rgba(0,0,0,0.1);
+  padding-right: 20px;
+}
+.hero-stat-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  color: #0A0A0E;
+  display: block;
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9CA3AF;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+.scroll-indicator span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--blue), transparent);
+}
+
+/* ============================================================
+   SECTIONS – SHARED
+   ============================================================ */
+.section {
+  padding: 100px 0;
+}
+.section-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+.section-header {
+  margin-bottom: 60px;
+}
+.section-header-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: flex-start;
+  gap: 60px;
+}
+
+/* ============================================================
+   SECTION 1: POSITION IN ECOSYSTEM
+   ============================================================ */
+.layer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-x: auto;
+  min-width: 0;
+}
+.layer-row {
+  min-width: 700px;
+}
+.layer-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2px;
+  align-items: stretch;
+}
+.layer-name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 16px 0 0;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border-right: 1px solid var(--border);
+  line-height: 1.5;
+  text-align: right;
+}
+.layer-cells {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.layer-cell {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px 14px;
+  transition: background 0.2s;
+  cursor: default;
+  min-width: 0;
+}
+.layer-cell:hover { background: #F0F0F0; }
+.layer-cell-icon { font-size: 18px; margin-bottom: 6px; display: block; opacity: 0.85; }
+.layer-cell-name { font-size: 12px; font-weight: 500; color: var(--text-1); display: block; margin-bottom: 3px; line-height: 1.35; word-break: keep-all; }
+.layer-cell-sub { font-size: 10px; color: var(--text-3); display: block; letter-spacing: 0.3px; line-height: 1.4; word-break: keep-all; }
+
+.layer-user    .layer-cell { border-top: 2px solid rgba(205,1,1,0.5); }
+.layer-mandate .layer-cell { border-top: 2px solid rgba(16,80,160,0.6); }
+.layer-app     .layer-cell { border-top: 2px solid rgba(140,80,255,0.5); }
+.layer-aggr    .layer-cell { border-top: 2px solid rgba(0,130,220,0.5); }
+.layer-defi    .layer-cell { border-top: 2px solid rgba(0,180,180,0.5); }
+.layer-asset   .layer-cell { border-top: 2px solid rgba(0,180,100,0.5); }
+.layer-infra   .layer-cell { border-top: 2px solid rgba(80,100,200,0.5); }
+
+.am-cell {
+  background: rgba(16,80,160,0.05) !important;
+  border-color: rgba(16,80,160,0.3) !important;
+  border-top: 2px solid var(--blue) !important;
+}
+.trust-cell-ref {
+  background: rgba(205,1,1,0.03) !important;
+  border-color: rgba(205,1,1,0.15) !important;
+}
+
+.layer-connector {
+  display: flex;
+  align-items: center;
+  padding: 4px 0 4px 180px;
+  gap: 4px;
+}
+.layer-connector-line {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--border) 0px, var(--border) 4px, transparent 4px, transparent 10px);
+}
+
+.insight-strip {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: #FAFAFA;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-left: 3px solid var(--blue);
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.insight-strip-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.insight-strip-text {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   SECTION 2: BUSINESS MODEL EVOLUTION
+   ============================================================ */
+.evolution-grid {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 0;
+}
+.evo-col-head {
+  padding: 14px 24px;
+  border: 1px solid var(--border);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.evo-col-head.old { color: var(--text-3); background: rgba(0,0,0,0.02); }
+.evo-col-head.new { color: var(--blue); background: rgba(16,80,160,0.04); border-color: var(--blue-border); }
+.evo-col-head-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.evo-col-head.old .evo-col-head-dot { background: var(--text-3); }
+.evo-col-head.new .evo-col-head-dot { background: var(--blue); }
+.evo-arrow-head {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: rgba(16,80,160,0.4);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.evo-row { display: contents; }
+.evo-cell {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-top: none;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.evo-cell.old { background: transparent; color: var(--text-3); }
+.evo-cell.new { background: rgba(16,80,160,0.025); border-color: rgba(16,80,160,0.1); }
+.evo-cell-icon { font-size: 18px; margin-bottom: 8px; display: block; }
+.evo-cell-title { font-weight: 600; color: var(--text-1); margin-bottom: 6px; font-size: 14px; }
+.evo-cell-body { font-size: 12px; color: var(--text-2); line-height: 1.7; }
+.evo-arrow-cell {
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(16,80,160,0.35);
+  font-size: 16px;
+}
+
+/* ============================================================
+   SECTION 3: ECOSYSTEM MAP (SVG)
+   ============================================================ */
+.map-container {
+  position: relative;
+  background: #FAFAFA;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.map-label-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: #FFFFFF;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.map-label-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.map-label-dot { width: 8px; height: 8px; border-radius: 50%; }
+svg.eco-map { width: 100%; height: 520px; }
+
+/* ============================================================
+   SECTION 4: NEW FUNCTIONS
+   ============================================================ */
+.functions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.func-card {
+  background: #FFFFFF;
+  padding: 40px 32px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.func-card:hover {
+  background: #FAFAFA;
+  box-shadow: inset 0 0 0 1px rgba(16,80,160,0.15);
+}
+.func-num {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  color: rgba(16,80,160,0.18);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.func-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(16,80,160,0.08);
+  border: 1px solid var(--blue-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.func-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-1);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.func-body {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.func-tags { display: flex; flex-wrap: wrap; }
+.func-card.wide { grid-column: span 2; }
+
+/* ============================================================
+   SECTION 5: COMPARISON TABLE
+   ============================================================ */
+.comparison-wrap { overflow-x: auto; }
+.comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  min-width: 800px;
+}
+.comparison-table th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9CA3AF;
+  background: #F7F7F7;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-weight: 500;
+}
+.comparison-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: #4B5563;
+  vertical-align: middle;
+  background: #FFFFFF;
+}
+.comparison-table tr.am-row td {
+  background: rgba(16,80,160,0.04);
+  color: var(--text-1);
+  border-bottom: 1px solid rgba(16,80,160,0.08);
+}
+.rating {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border: 1px solid;
+  border-radius: 2px;
+  display: inline-block;
+}
+.rating-high { color: var(--blue); border-color: var(--blue-border); }
+.rating-mid  { color: var(--text-2); border-color: rgba(0,0,0,0.12); }
+.rating-low  { color: var(--text-3); border-color: rgba(0,0,0,0.06); opacity: 0.6; }
+
+/* ============================================================
+   SECTION 6: ROADMAP TIMELINE
+   ============================================================ */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 60px;
+  overflow-x: auto;
+}
+.phase-card { background: #FFFFFF; padding: 36px 28px; }
+.phase-year { font-size: 10px; letter-spacing: 2px; color: var(--text-3); margin-bottom: 12px; text-transform: uppercase; }
+.phase-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  border-left: 2px solid var(--blue);
+  padding-left: 10px;
+  margin-bottom: 16px;
+}
+.phase-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-1);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.phase-items { font-size: 12px; color: var(--text-2); line-height: 2; }
+.phase-items li { list-style: none; padding-left: 12px; position: relative; }
+.phase-items li::before { content: '—'; position: absolute; left: 0; color: var(--text-3); }
+
+/* ============================================================
+   CONCLUSION BOX
+   ============================================================ */
+.conclusion-box {
+  background: rgba(16,80,160,0.03);
+  border: 1px solid rgba(16,80,160,0.15);
+  padding: 40px 48px;
+  margin-top: 40px;
+  border-left: 4px solid var(--blue);
+}
+.conclusion-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.conclusion-text {
+  font-size: 15px;
+  color: var(--text-1);
+  line-height: 2;
+}
+.conclusion-text strong { color: var(--blue); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: #F2F2F2;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 48px 80px;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-left { font-family: var(--serif); font-size: 20px; color: rgba(10,10,14,0.35); }
+.footer-right { font-size: 11px; color: var(--text-3); text-align: right; line-height: 1.8; }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     TAB SWITCHER
+     ============================================================ -->
+<div class="page-tabs">
+  <a href="defi-asset-management-ecosystem.html" class="page-tab">信託銀行の視点</a>
+  <div class="page-tab-sep"></div>
+  <a href="defi-am-company.html" class="page-tab active">委託会社（運用会社）の視点</a>
+</div>
+
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      <div>
+        <div class="nav-logo-text">FUTURE FINANCE</div>
+        <div class="nav-logo-sub">DeFi × Asset Manager</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#position">Position</a></li>
+      <li><a href="#evolution">Strategy</a></li>
+      <li><a href="#functions">Functions</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+    </ul>
+    <div class="nav-date">FEBRUARY 2026</div>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-label">ASSET MANAGER STRATEGY</div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Future of Asset Management — AM Perspective</div>
+    <h1 class="hero-title">
+      DeFiが変革する<br>
+      <em>委託会社の</em><br>
+      戦略的役割
+    </h1>
+    <p class="hero-desc">
+      分散型金融プロトコルが資産運用の構造を根本から問い直す。
+      委託会社（運用会社）はいかにDeFiを取り込み、
+      競争優位を構築するか。
+    </p>
+    <a href="#position" class="hero-cta">詳細を見る</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">6</span>
+      <span class="hero-stat-label">New Strategies</span>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label">Relationships</span>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">4</span>
+      <span class="hero-stat-label">Phases</span>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 1: POSITION IN ECOSYSTEM
+     ============================================================ -->
+<section class="section" id="position" style="background: #F7F7F7;">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">01 — Position in Ecosystem</p>
+          <span class="blue-line"></span>
+          <h2 class="section-title">エコシステムにおける<br>委託会社の位置づけ</h2>
+        </div>
+        <p class="section-body">
+          委託会社（運用会社）はエコシステムの中核に位置する。
+          投資家から資産を受け、信託銀行（受託者）に指図を出しながら、
+          DeFiプロトコルを通じた運用戦略を立案・実行する。
+        </p>
+      </div>
+    </div>
+
+    <div class="layer-stack">
+
+      <!-- User Layer -->
+      <div class="layer-row layer-user">
+        <div class="layer-name">投資家層</div>
+        <div class="layer-cells">
+          <div class="layer-cell">
+            <span class="layer-cell-icon">👤</span>
+            <span class="layer-cell-name">個人投資家</span>
+            <span class="layer-cell-sub">Retail / HNWI</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🏢</span>
+            <span class="layer-cell-name">機関投資家</span>
+            <span class="layer-cell-sub">年金基金 / 保険会社</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🌐</span>
+            <span class="layer-cell-name">海外投資家</span>
+            <span class="layer-cell-sub">クロスボーダー参加</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🤖</span>
+            <span class="layer-cell-name">AI エージェント</span>
+            <span class="layer-cell-sub">自律的資産配分</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-connector"><div class="layer-connector-line"></div></div>
+
+      <!-- Mandate Layer (AM Company) -->
+      <div class="layer-row layer-mandate">
+        <div class="layer-name">委託・運用指図層</div>
+        <div class="layer-cells">
+          <div class="layer-cell am-cell">
+            <span class="layer-cell-icon">📋</span>
+            <span class="layer-cell-name">委託会社</span>
+            <span class="layer-cell-sub" style="color:var(--blue);">運用会社 ◀ 注目</span>
+          </div>
+          <div class="layer-cell trust-cell-ref">
+            <span class="layer-cell-icon">🏦</span>
+            <span class="layer-cell-name">信託銀行</span>
+            <span class="layer-cell-sub">受託者 / カストディ</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🏪</span>
+            <span class="layer-cell-name">販売会社</span>
+            <span class="layer-cell-sub">証券会社 / 銀行</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">⚖️</span>
+            <span class="layer-cell-name">規制当局</span>
+            <span class="layer-cell-sub">FSA / SEC / ESMA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-connector"><div class="layer-connector-line"></div></div>
+
+      <!-- App Layer -->
+      <div class="layer-row layer-app">
+        <div class="layer-name">アプリ層</div>
+        <div class="layer-cells">
+          <div class="layer-cell">
+            <span class="layer-cell-icon">📊</span>
+            <span class="layer-cell-name">DeFiポートフォリオ</span>
+            <span class="layer-cell-sub">自動リバランス</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🏛</span>
+            <span class="layer-cell-name">トークン化ファンド</span>
+            <span class="layer-cell-sub">STO / ERC-4626</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🗳</span>
+            <span class="layer-cell-name">DAOガバナンス</span>
+            <span class="layer-cell-sub">議決権行使</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🔐</span>
+            <span class="layer-cell-name">コンプライアンス</span>
+            <span class="layer-cell-sub">KYC / AML Gateway</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-connector"><div class="layer-connector-line"></div></div>
+
+      <!-- Aggregation Layer -->
+      <div class="layer-row layer-aggr">
+        <div class="layer-name">集約層</div>
+        <div class="layer-cells">
+          <div class="layer-cell">
+            <span class="layer-cell-icon">⚙️</span>
+            <span class="layer-cell-name">イールド<br>オプティマイザー</span>
+            <span class="layer-cell-sub">最適利回り探索</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🔮</span>
+            <span class="layer-cell-name">オラクルネットワーク</span>
+            <span class="layer-cell-sub">価格フィード / データ</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🌉</span>
+            <span class="layer-cell-name">クロスチェーン<br>ブリッジ</span>
+            <span class="layer-cell-sub">資産移動・相互運用</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">📡</span>
+            <span class="layer-cell-name">インデックス<br>プロトコル</span>
+            <span class="layer-cell-sub">分散型ETF構成</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-connector"><div class="layer-connector-line"></div></div>
+
+      <!-- DeFi Protocol Layer -->
+      <div class="layer-row layer-defi">
+        <div class="layer-name">DeFiプロトコル層</div>
+        <div class="layer-cells">
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🔄</span>
+            <span class="layer-cell-name">DEX</span>
+            <span class="layer-cell-sub">Uniswap / Curve</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">💰</span>
+            <span class="layer-cell-name">レンディング</span>
+            <span class="layer-cell-sub">Aave / Compound</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">📈</span>
+            <span class="layer-cell-name">デリバティブ</span>
+            <span class="layer-cell-sub">GMX / dYdX</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🛡</span>
+            <span class="layer-cell-name">保険プロトコル</span>
+            <span class="layer-cell-sub">Nexus Mutual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-connector"><div class="layer-connector-line"></div></div>
+
+      <!-- Asset Layer -->
+      <div class="layer-row layer-asset">
+        <div class="layer-name">資産トークン化層</div>
+        <div class="layer-cells">
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🏠</span>
+            <span class="layer-cell-name">不動産 RWA</span>
+            <span class="layer-cell-sub">不動産トークン</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">📜</span>
+            <span class="layer-cell-name">債券 / 国債</span>
+            <span class="layer-cell-sub">米国債トークン</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">💎</span>
+            <span class="layer-cell-name">コモディティ</span>
+            <span class="layer-cell-sub">金・原油トークン</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🏭</span>
+            <span class="layer-cell-name">株式 STO</span>
+            <span class="layer-cell-sub">上場株式トークン</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-connector"><div class="layer-connector-line"></div></div>
+
+      <!-- Infrastructure Layer -->
+      <div class="layer-row layer-infra">
+        <div class="layer-name">インフラ層</div>
+        <div class="layer-cells">
+          <div class="layer-cell">
+            <span class="layer-cell-icon">⟠</span>
+            <span class="layer-cell-name">Ethereum L1</span>
+            <span class="layer-cell-sub">基盤スマートコントラクト</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">⚡</span>
+            <span class="layer-cell-name">L2 / Rollup</span>
+            <span class="layer-cell-sub">低コスト・高速決済</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🌐</span>
+            <span class="layer-cell-name">代替チェーン</span>
+            <span class="layer-cell-sub">Solana / Aptos</span>
+          </div>
+          <div class="layer-cell">
+            <span class="layer-cell-icon">🏗</span>
+            <span class="layer-cell-name">CBDC</span>
+            <span class="layer-cell-sub">中銀デジタル通貨</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.layer-stack -->
+
+    <div class="insight-strip">
+      <span class="insight-strip-label">Key Position</span>
+      <p class="insight-strip-text">
+        委託会社（運用会社）は「投資判断の唯一の担い手」として、DeFiプロトコルを直接活用する新たな権能を得る一方、
+        信託銀行（受託者）との関係はより<strong style="color:var(--text-1);">対等かつ協働的</strong>なものへと進化する。
+        コード・アルゴリズムに代替されない「投資哲学」と「受益者への説明責任」が委託会社の価値の核心となる。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: BUSINESS MODEL EVOLUTION
+     ============================================================ -->
+<section class="section" id="evolution" style="background: #FFFFFF;">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">02 — Business Model</p>
+          <span class="blue-line"></span>
+          <h2 class="section-title">ビジネスモデルの<br>変革マップ</h2>
+        </div>
+        <p class="section-body">
+          伝統的な委託会社の機能がDeFi時代においてどう再定義されるか。
+          スマートコントラクトによる自動化でオペレーションコストを削減しつつ、
+          投資判断・戦略立案という中核価値を強化する。
+        </p>
+      </div>
+    </div>
+
+    <div class="evolution-grid">
+      <!-- Headers -->
+      <div class="evo-col-head old">
+        <div class="evo-col-head-dot"></div>
+        従来型 委託会社の業務
+      </div>
+      <div class="evo-arrow-head"></div>
+      <div class="evo-col-head new">
+        <div class="evo-col-head-dot"></div>
+        DeFi時代の新戦略・業務
+      </div>
+
+      <!-- Row 1 -->
+      <div class="evo-cell old">
+        <span class="evo-cell-icon">📁</span>
+        <div class="evo-cell-title">ファンド設計・組成</div>
+        <div class="evo-cell-body">信託銀行との書面契約によるファンド設立。1本設定に数ヶ月・数百万円のコスト</div>
+      </div>
+      <div class="evo-arrow-cell">→</div>
+      <div class="evo-cell new">
+        <span class="evo-cell-icon">📝</span>
+        <div class="evo-cell-title">スマートコントラクト型トークン化ファンド</div>
+        <div class="evo-cell-body">ERC-4626準拠のオンチェーンファンドを自社で設計・デプロイ。24時間設定・解約可能、グローバルな投資家参加、コード監査による透明性</div>
+        <div style="margin-top:10px;">
+          <span class="tag tag-blue">ERC-4626</span>
+          <span class="tag tag-blue">STO</span>
+          <span class="tag tag-blue">24/7流動性</span>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="evo-cell old">
+        <span class="evo-cell-icon">📞</span>
+        <div class="evo-cell-title">運用指図（委託者→受託者）</div>
+        <div class="evo-cell-body">電話・書面・FAXによる売買指図。T+2決済。手動入力によるオペレーショナルリスク</div>
+      </div>
+      <div class="evo-arrow-cell">→</div>
+      <div class="evo-cell new">
+        <span class="evo-cell-icon">⚡</span>
+        <div class="evo-cell-title">オンチェーン自動執行・スマート指図</div>
+        <div class="evo-cell-body">スマートコントラクトによる条件付き自動執行（例：リバランスルール、損切ライン）。信託銀行はオンチェーン検証者として機能。エラーレス・即時決済</div>
+        <div style="margin-top:10px;">
+          <span class="tag tag-blue">自動執行</span>
+          <span class="tag tag-blue">T+0決済</span>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="evo-cell old">
+        <span class="evo-cell-icon">📊</span>
+        <div class="evo-cell-title">ポートフォリオ管理</div>
+        <div class="evo-cell-body">伝統資産（株・債券）中心。日次NAV計算。月次レポーティング</div>
+      </div>
+      <div class="evo-arrow-cell">→</div>
+      <div class="evo-cell new">
+        <span class="evo-cell-icon">🎯</span>
+        <div class="evo-cell-title">DeFi戦略組み込みマルチアセット運用</div>
+        <div class="evo-cell-body">伝統資産＋RWA＋DeFiイールドの統合ポートフォリオ。リアルタイムNAV。スマートコントラクトによるリバランス自動化。投資家への24時間透明性提供</div>
+        <div style="margin-top:10px;">
+          <span class="tag tag-blue">マルチアセット</span>
+          <span class="tag tag-blue">リアルタイムNAV</span>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="evo-cell old">
+        <span class="evo-cell-icon">🏪</span>
+        <div class="evo-cell-title">ファンド販売・分配</div>
+        <div class="evo-cell-body">証券会社・銀行経由の販売のみ。国内投資家限定。高い販売手数料構造</div>
+      </div>
+      <div class="evo-arrow-cell">→</div>
+      <div class="evo-cell new">
+        <span class="evo-cell-icon">🌏</span>
+        <div class="evo-cell-title">DEX上場・グローバル直接分配</div>
+        <div class="evo-cell-body">トークン化ファンドをDEXに直接上場。Uniswap等のAMMで二次流通市場を形成。小口分割投資・海外投資家の参加が可能。販売コストの構造的削減</div>
+        <div style="margin-top:10px;">
+          <span class="tag tag-blue">DEX上場</span>
+          <span class="tag tag-blue">グローバル配信</span>
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="evo-cell old" style="border-bottom:1px solid var(--border);">
+        <span class="evo-cell-icon">💴</span>
+        <div class="evo-cell-title">収益・報酬構造</div>
+        <div class="evo-cell-body">固定の信託報酬（純資産×基本料率）。透明性低い費用体系</div>
+      </div>
+      <div class="evo-arrow-cell" style="border-bottom:1px solid var(--border);">→</div>
+      <div class="evo-cell new" style="border-bottom:1px solid rgba(16,80,160,0.12);">
+        <span class="evo-cell-icon">💎</span>
+        <div class="evo-cell-title">パフォーマンス連動型スマートコントラクト報酬</div>
+        <div class="evo-cell-body">オンチェーンで自動分配される成功報酬モデル。ガバナンストークンによる投資家参加型運営。プロトコル手数料収入（流動性提供報酬）という新収益源</div>
+        <div style="margin-top:10px;">
+          <span class="tag tag-blue">成功報酬</span>
+          <span class="tag tag-blue">ガバナンストークン</span>
+        </div>
+      </div>
+    </div><!-- /.evolution-grid -->
+
+    <div class="insight-strip" style="margin-top:40px;">
+      <span class="insight-strip-label">Strategic Insight</span>
+      <p class="insight-strip-text">
+        委託会社がDeFiを活用することで得られる最大の優位性は<strong style="color:var(--text-1);">「コスト構造の破壊的削減」と「グローバル投資家へのダイレクトアクセス」</strong>。
+        一方、スマートコントラクトのリスク管理・規制対応・受益者保護においては、信託銀行との協働がむしろ強化される。
+        競合するのではなく、新しいバリューチェーンを共同設計する視点が重要となる。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3: ECOSYSTEM MAP (SVG)
+     ============================================================ -->
+<section class="section" id="map" style="background: #F2F2F2;">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">03 — Ecosystem Map</p>
+          <span class="blue-line"></span>
+          <h2 class="section-title">委託会社を中心とした<br>関係者マップ</h2>
+        </div>
+        <p class="section-body">
+          委託会社（運用会社）は投資家・受託者・DeFiプロトコル・規制当局をつなぐ
+          戦略的ハブとして機能する。各接点における役割と情報・資金の流れを可視化する。
+        </p>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <div class="map-label-bar">
+        <div class="map-label-item">
+          <div class="map-label-dot" style="background:#1050A0;"></div>
+          <span>委託会社（中心）</span>
+        </div>
+        <div class="map-label-item">
+          <div class="map-label-dot" style="background:#CD0101;"></div>
+          <span>信託銀行（受託者）</span>
+        </div>
+        <div class="map-label-item">
+          <div class="map-label-dot" style="background:#4B8FE0;"></div>
+          <span>DeFiプロトコル</span>
+        </div>
+        <div class="map-label-item">
+          <div class="map-label-dot" style="background:#6C9E5F;"></div>
+          <span>資産・市場</span>
+        </div>
+        <div class="map-label-item">
+          <div class="map-label-dot" style="background:#9B9B9B;"></div>
+          <span>投資家・規制</span>
+        </div>
+      </div>
+
+      <svg class="eco-map" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Arrow markers -->
+          <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="rgba(16,80,160,0.6)"/>
+          </marker>
+          <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="rgba(205,1,1,0.55)"/>
+          </marker>
+          <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="rgba(100,100,100,0.4)"/>
+          </marker>
+          <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="rgba(70,160,90,0.6)"/>
+          </marker>
+          <marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="rgba(0,160,160,0.6)"/>
+          </marker>
+          <marker id="arrow-blue-r" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto">
+            <path d="M8,0 L8,6 L0,3 z" fill="rgba(16,80,160,0.6)"/>
+          </marker>
+        </defs>
+
+        <!-- === CONNECTION LINES === -->
+
+        <!-- Center ↔ 投資家 (top center) -->
+        <line x1="450" y1="220" x2="450" y2="115"
+              stroke="rgba(100,100,100,0.35)" stroke-width="1.5" stroke-dasharray="5,3"
+              marker-end="url(#arrow-gray)"/>
+        <line x1="450" y1="300" x2="450" y2="135"
+              stroke="rgba(100,100,100,0.25)" stroke-width="1" stroke-dasharray="5,3"/>
+
+        <!-- Center → 信託銀行 (right) -->
+        <line x1="570" y1="260" x2="680" y2="215"
+              stroke="rgba(205,1,1,0.5)" stroke-width="2"
+              marker-end="url(#arrow-red)"/>
+        <!-- 信託銀行 → Center (return) -->
+        <line x1="680" y1="230" x2="572" y2="275"
+              stroke="rgba(205,1,1,0.3)" stroke-width="1.2" stroke-dasharray="4,3"
+              marker-end="url(#arrow-red)"/>
+
+        <!-- Center → DEXプロトコル (left) -->
+        <line x1="330" y1="260" x2="215" y2="215"
+              stroke="rgba(75,143,224,0.6)" stroke-width="2"
+              marker-end="url(#arrow-blue)"/>
+        <!-- DEX → Center (return) -->
+        <line x1="215" y1="230" x2="328" y2="275"
+              stroke="rgba(75,143,224,0.3)" stroke-width="1.2" stroke-dasharray="4,3"
+              marker-end="url(#arrow-blue)"/>
+
+        <!-- Center → ブロックチェーン (bottom) -->
+        <line x1="450" y1="300" x2="450" y2="400"
+              stroke="rgba(0,160,160,0.5)" stroke-width="2"
+              marker-end="url(#arrow-teal)"/>
+
+        <!-- Center → RWA (bottom left) -->
+        <line x1="400" y1="295" x2="255" y2="390"
+              stroke="rgba(70,160,90,0.55)" stroke-width="1.8"
+              marker-end="url(#arrow-green)"/>
+
+        <!-- Center ↔ 規制当局 (top right) -->
+        <line x1="520" y1="230" x2="660" y2="110"
+              stroke="rgba(200,130,0,0.45)" stroke-width="1.5" stroke-dasharray="4,3"
+              marker-end="url(#arrow-gray)"/>
+
+        <!-- Center ↔ 販売会社 (top left) -->
+        <line x1="380" y1="230" x2="250" y2="110"
+              stroke="rgba(100,100,100,0.4)" stroke-width="1.5" stroke-dasharray="4,3"
+              marker-end="url(#arrow-gray)"/>
+
+        <!-- Center → レンディング (bottom right) -->
+        <line x1="500" y1="295" x2="650" y2="395"
+              stroke="rgba(75,143,224,0.45)" stroke-width="1.5"
+              marker-end="url(#arrow-blue)"/>
+
+        <!-- === EDGE LABELS (connection descriptions) === -->
+        <text x="530" y="248" font-family="sans-serif" font-size="9" fill="rgba(205,1,1,0.7)" transform="rotate(-22,530,248)">受託指図・委託</text>
+        <text x="320" y="248" font-family="sans-serif" font-size="9" fill="rgba(75,143,224,0.8)" transform="rotate(22,320,248)">流動性提供・決済</text>
+        <text x="380" y="358" font-family="sans-serif" font-size="9" fill="rgba(70,160,90,0.8)" transform="rotate(32,380,358)">RWA組成・資産評価</text>
+        <text x="503" y="358" font-family="sans-serif" font-size="9" fill="rgba(75,143,224,0.7)" transform="rotate(-30,503,358)">イールド運用</text>
+        <text x="452" y="365" font-family="sans-serif" font-size="9" fill="rgba(0,160,160,0.8)" text-anchor="middle">オンチェーン記録・透明性</text>
+        <text x="450" y="170" font-family="sans-serif" font-size="9" fill="rgba(100,100,100,0.7)" text-anchor="middle">運用報告・受益者対応</text>
+
+        <!-- === NODE: Center — 運用会社 === -->
+        <rect x="350" y="220" width="200" height="80" rx="3"
+              fill="rgba(255,255,255,0.97)"
+              stroke="rgba(16,80,160,0.5)" stroke-width="2"/>
+        <rect x="350" y="220" width="200" height="4" rx="2" fill="#1050A0"/>
+        <text x="450" y="254" font-family="serif" font-size="18" font-weight="400" fill="#0A0A0E" text-anchor="middle">運用会社</text>
+        <text x="450" y="272" font-family="sans-serif" font-size="10" fill="#1050A0" text-anchor="middle" letter-spacing="1">ASSET MANAGER</text>
+        <text x="450" y="288" font-family="sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle" letter-spacing="1">MANDATE LAYER</text>
+
+        <!-- === NODE: 個人・機関投資家 (top center) === -->
+        <rect x="350" y="60" width="200" height="55" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(100,100,100,0.3)" stroke-width="1.2"/>
+        <text x="362" y="84" font-family="sans-serif" font-size="14">👥</text>
+        <text x="400" y="84" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">受益者・投資家</text>
+        <text x="400" y="100" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">個人 / 機関 / 海外</text>
+
+        <!-- === NODE: 信託銀行 (right) === -->
+        <rect x="680" y="175" width="165" height="72" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(205,1,1,0.4)" stroke-width="1.5"/>
+        <rect x="680" y="175" width="165" height="3" rx="1" fill="rgba(205,1,1,0.7)"/>
+        <text x="695" y="204" font-family="sans-serif" font-size="14">🏦</text>
+        <text x="760" y="204" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">信託銀行</text>
+        <text x="760" y="220" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">受託者 / カストディ</text>
+        <text x="760" y="235" font-family="sans-serif" font-size="10" fill="rgba(205,1,1,0.6)" text-anchor="middle">KYC / 資産保管</text>
+
+        <!-- === NODE: DEXプロトコル (left) === -->
+        <rect x="55" y="175" width="165" height="72" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(75,143,224,0.4)" stroke-width="1.5"/>
+        <rect x="55" y="175" width="165" height="3" rx="1" fill="rgba(75,143,224,0.7)"/>
+        <text x="70" y="204" font-family="sans-serif" font-size="14">🔄</text>
+        <text x="137" y="204" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">DEXプロトコル</text>
+        <text x="137" y="220" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Uniswap / Curve</text>
+        <text x="137" y="235" font-family="sans-serif" font-size="10" fill="rgba(75,143,224,0.7)" text-anchor="middle">流動性プール / AMM</text>
+
+        <!-- === NODE: ブロックチェーン (bottom center) === -->
+        <rect x="350" y="400" width="200" height="58" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(0,160,160,0.35)" stroke-width="1.2"/>
+        <text x="362" y="426" font-family="sans-serif" font-size="14">⟠</text>
+        <text x="400" y="427" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">Blockchain</text>
+        <text x="400" y="445" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">ETH / L2 / CBDC</text>
+
+        <!-- === NODE: RWA (bottom left) === -->
+        <rect x="105" y="375" width="165" height="60" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(70,160,90,0.35)" stroke-width="1.2"/>
+        <text x="118" y="401" font-family="sans-serif" font-size="14">🏠</text>
+        <text x="187" y="401" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">RWA / トークン化</text>
+        <text x="187" y="419" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">不動産・債券・株式</text>
+        <text x="187" y="430" font-family="sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">裏付け資産管理</text>
+
+        <!-- === NODE: 規制当局 (top right) === -->
+        <rect x="640" y="60" width="160" height="58" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(200,130,0,0.3)" stroke-width="1.2"/>
+        <text x="652" y="86" font-family="sans-serif" font-size="14">⚖️</text>
+        <text x="720" y="86" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">規制当局</text>
+        <text x="720" y="104" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">FSA / SEC / ESMA</text>
+
+        <!-- === NODE: 販売会社 (top left) === -->
+        <rect x="100" y="60" width="160" height="58" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(100,100,100,0.25)" stroke-width="1.2"/>
+        <text x="112" y="86" font-family="sans-serif" font-size="14">🏪</text>
+        <text x="180" y="86" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">販売会社</text>
+        <text x="180" y="104" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">証券会社 / DEX</text>
+
+        <!-- === NODE: レンディング (bottom right) === -->
+        <rect x="635" y="375" width="160" height="60" rx="3"
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(75,143,224,0.35)" stroke-width="1.2"/>
+        <text x="648" y="401" font-family="sans-serif" font-size="14">💰</text>
+        <text x="715" y="401" font-family="serif" font-size="14" fill="#374151" text-anchor="middle">レンディング</text>
+        <text x="715" y="419" font-family="sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Aave / Compound</text>
+        <text x="715" y="430" font-family="sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">利回り獲得戦略</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 4: 6 NEW STRATEGIES / FUNCTIONS
+     ============================================================ -->
+<section class="section" id="functions" style="background: #FFFFFF;">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">04 — New Functions</p>
+          <span class="blue-line"></span>
+          <h2 class="section-title">委託会社が担う<br>６つの新戦略</h2>
+        </div>
+        <p class="section-body">
+          DeFi時代において委託会社（運用会社）が新たに取り組むべき
+          戦略領域と具体的な実装方針。投資判断の高度化と
+          オペレーション自動化の両輪で競争優位を構築する。
+        </p>
+      </div>
+    </div>
+
+    <div class="functions-grid">
+
+      <!-- Function 1 -->
+      <div class="func-card">
+        <div class="func-num">01</div>
+        <div class="func-icon">📝</div>
+        <div class="func-title">オンチェーン<br>ファンド設計・組成</div>
+        <p class="func-body">
+          ERC-4626標準に準拠したトークン化ファンドを自社でデプロイ。
+          信託銀行との契約書類をスマートコントラクトで代替し、
+          ファンド設定・解約・NAV計算をオンチェーン自動化。
+          コスト削減と24時間流動性を同時実現する。
+        </p>
+        <div class="func-tags">
+          <span class="tag tag-blue">ERC-4626</span>
+          <span class="tag tag-blue">STO</span>
+          <span class="tag tag-blue">オンチェーンNAV</span>
+        </div>
+      </div>
+
+      <!-- Function 2 -->
+      <div class="func-card">
+        <div class="func-num">02</div>
+        <div class="func-icon">⚙️</div>
+        <div class="func-title">DeFiプロトコル<br>活用運用戦略</div>
+        <p class="func-body">
+          Uniswap流動性プール（AMM）・Aaveレンディング・dYdXデリバティブを
+          組み合わせた複合運用戦略の立案と実行。
+          イールドオプティマイザーを通じた自動最適化。
+          伝統資産では実現不可能な非相関リターン源の確保。
+        </p>
+        <div class="func-tags">
+          <span class="tag tag-blue">イールドファーミング</span>
+          <span class="tag tag-blue">流動性提供</span>
+          <span class="tag tag-blue">デリバティブ</span>
+        </div>
+      </div>
+
+      <!-- Function 3 -->
+      <div class="func-card">
+        <div class="func-num">03</div>
+        <div class="func-icon">🏠</div>
+        <div class="func-title">RWAトークン化<br>ファンド組成</div>
+        <p class="func-body">
+          不動産・社債・国債・インフラ資産をブロックチェーン上でトークン化し、
+          オンチェーンファンドに組み込む。信託銀行と協働した
+          法的ストラクチャー設計（不動産信託STO・特定目的会社活用）。
+          小口化による投資家層の拡大とグローバル流通の実現。
+        </p>
+        <div class="func-tags">
+          <span class="tag tag-blue">RWA</span>
+          <span class="tag tag-blue">不動産STO</span>
+          <span class="tag tag-blue">社債トークン</span>
+        </div>
+      </div>
+
+      <!-- Function 4 -->
+      <div class="func-card">
+        <div class="func-num">04</div>
+        <div class="func-icon">🤖</div>
+        <div class="func-title">AI×オンチェーン<br>クオンツ運用</div>
+        <p class="func-body">
+          オンチェーンデータ（ウォレット動向・DEX流動性・ガス代トレンド）を
+          機械学習モデルに入力し、高精度なアルファ生成戦略を構築。
+          AIエージェントがスマートコントラクトに直接運用指図を出す
+          「フルオートノマス」ファンドの設計・監督を担う。
+        </p>
+        <div class="func-tags">
+          <span class="tag tag-blue">オンチェーンデータ</span>
+          <span class="tag tag-blue">MLモデル</span>
+          <span class="tag tag-blue">AIエージェント</span>
+        </div>
+      </div>
+
+      <!-- Function 5 -->
+      <div class="func-card">
+        <div class="func-num">05</div>
+        <div class="func-icon">🌏</div>
+        <div class="func-title">グローバル直接<br>分配・DEX上場</div>
+        <p class="func-body">
+          トークン化ファンドをDEXに直接上場し、証券会社を介さない
+          グローバル投資家へのダイレクトアクセスを実現。
+          セカンダリー市場（AMM）での二次流通を確保しながら、
+          KYC済み許可型プールで規制準拠を維持する。
+        </p>
+        <div class="func-tags">
+          <span class="tag tag-blue">DEX上場</span>
+          <span class="tag tag-blue">パーミッションドプール</span>
+          <span class="tag tag-blue">クロスボーダー</span>
+        </div>
+      </div>
+
+      <!-- Function 6 -->
+      <div class="func-card">
+        <div class="func-num">06</div>
+        <div class="func-icon">📊</div>
+        <div class="func-title">リアルタイム<br>透明性・報告自動化</div>
+        <p class="func-body">
+          ポートフォリオの全ポジションをオンチェーンで公開し、
+          投資家が24時間リアルタイムでNAVを確認可能に。
+          スマートコントラクトが運用費用・成功報酬・分配金を
+          自動計算・自動支払い。規制当局への定期報告も自動生成。
+        </p>
+        <div class="func-tags">
+          <span class="tag tag-blue">リアルタイムNAV</span>
+          <span class="tag tag-blue">自動レポーティング</span>
+          <span class="tag tag-blue">透明性</span>
+        </div>
+      </div>
+
+    </div><!-- /.functions-grid -->
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: PLAYER COMPARISON
+     ============================================================ -->
+<section class="section" id="comparison" style="background: #F7F7F7;">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">05 — Competitive Position</p>
+          <span class="blue-line"></span>
+          <h2 class="section-title">プレイヤー間の<br>役割と優位性比較</h2>
+        </div>
+        <p class="section-body">
+          DeFiエコシステムにおける各プレイヤーの機能を比較する。
+          委託会社（運用会社）が固有の強みを維持・強化すべき領域と、
+          信託銀行・DeFiプロトコルとの協働領域を整理する。
+        </p>
+      </div>
+    </div>
+
+    <div class="comparison-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th style="width:180px;">プレイヤー</th>
+            <th>投資判断権限</th>
+            <th>DeFi直接活用</th>
+            <th>受益者保護</th>
+            <th>グローバル流通</th>
+            <th>規制対応</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="am-row">
+            <td><strong>🎯 委託会社<br><small style="font-weight:normal;color:var(--blue);">（運用会社）</small></strong></td>
+            <td><span class="rating rating-high">◎ 中核</span></td>
+            <td><span class="rating rating-high">◎ 戦略活用</span></td>
+            <td><span class="rating rating-mid">○ 信認義務</span></td>
+            <td><span class="rating rating-high">◎ トークン化</span></td>
+            <td><span class="rating rating-mid">○ 対応可</span></td>
+          </tr>
+          <tr>
+            <td>🏦 信託銀行<br><small style="color:var(--text-3);">（受託者）</small></td>
+            <td><span class="rating rating-low">✕ 指図受け</span></td>
+            <td><span class="rating rating-mid">△ KYCゲートウェイ</span></td>
+            <td><span class="rating rating-high">◎ 法的信認</span></td>
+            <td><span class="rating rating-low">△ 制限的</span></td>
+            <td><span class="rating rating-high">◎ 制度的強み</span></td>
+          </tr>
+          <tr>
+            <td>🔄 DeFiネイティブ<br><small style="color:var(--text-3);">（Uniswap等）</small></td>
+            <td><span class="rating rating-low">✕ 非対応</span></td>
+            <td><span class="rating rating-high">◎ 完全自律</span></td>
+            <td><span class="rating rating-low">✕ なし</span></td>
+            <td><span class="rating rating-high">◎ パーミッションレス</span></td>
+            <td><span class="rating rating-low">✕ 規制外</span></td>
+          </tr>
+          <tr>
+            <td>📱 ロボアドバイザー</td>
+            <td><span class="rating rating-mid">△ アルゴリズム</span></td>
+            <td><span class="rating rating-low">△ 限定的</span></td>
+            <td><span class="rating rating-mid">○ 登録制</span></td>
+            <td><span class="rating rating-mid">○ 国内中心</span></td>
+            <td><span class="rating rating-mid">○ 対応可</span></td>
+          </tr>
+          <tr>
+            <td>🌐 暗号資産取引所</td>
+            <td><span class="rating rating-low">✕ 自己売買</span></td>
+            <td><span class="rating rating-high">◎ 直接アクセス</span></td>
+            <td><span class="rating rating-low">✕ 制限的</span></td>
+            <td><span class="rating rating-high">◎ グローバル</span></td>
+            <td><span class="rating rating-mid">△ 部分的</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--text-3);margin-top:12px;">◎ = 強み ｜ ○ = 対応可 ｜ △ = 限定的 ｜ ✕ = 非対応または機能なし</p>
+
+    <div class="insight-strip" style="margin-top:40px;">
+      <span class="insight-strip-label">Conclusion</span>
+      <p class="insight-strip-text">
+        委託会社は「投資判断×グローバル流通���を固有優位として持ち、DeFiネイティブプロトコルが代替できない<strong style="color:var(--text-1);">「ファイデューシャリー責任と投資哲学」</strong>を体現する。
+        信託銀行とは競合ではなく<strong style="color:var(--text-1);">「投資戦略の担い手」×「法的信認の担い手」の協働構造</strong>を構築することが、
+        DeFiエコシステムにおける制度的優位性の最大化につながる。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6: ROADMAP
+     ============================================================ -->
+<section class="section" id="roadmap" style="background: #FFFFFF;">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">06 — Roadmap</p>
+          <span class="blue-line"></span>
+          <h2 class="section-title">委託会社 DeFi化<br>戦略ロードマップ</h2>
+        </div>
+        <p class="section-body">
+          委託会社のDeFi統合は４フェーズで進行する。
+          各フェーズで委託会社が優先すべき戦略投資と
+          信託銀行との協働スキームを定義する。
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="phase-card">
+        <div class="phase-year">2025 — 2026</div>
+        <div class="phase-badge">Phase 1</div>
+        <div class="phase-title">研究・<br>実証実験期</div>
+        <ul class="phase-items">
+          <li>DeFiプロトコル調査・選定</li>
+          <li>社内PoC体制整備</li>
+          <li>スマートコントラクト監査パートナー選定</li>
+          <li>パーミッションドDeFiテスト参加</li>
+          <li>信託銀行とのDeFi協働スキーム検討</li>
+        </ul>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-year">2026 — 2027</div>
+        <div class="phase-badge">Phase 2</div>
+        <div class="phase-title">試験的<br>ファンド展開</div>
+        <ul class="phase-items">
+          <li>小規模トークン化ファンド（STO）組成</li>
+          <li>ERC-4626準拠ファンドのデプロイ</li>
+          <li>RWAトークン化第一弾（国債・不動産）</li>
+          <li>信託銀行との協働カストディ契約締結</li>
+          <li>DEX流動性プール参加・イールド獲得開始</li>
+        </ul>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-year">2027 — 2028</div>
+        <div class="phase-badge">Phase 3</div>
+        <div class="phase-title">オンチェーン<br>ファンド本格化</div>
+        <ul class="phase-items">
+          <li>フルオンチェーンファンドの機関向け販売</li>
+          <li>AIクオンツ運用モデルの本番稼働</li>
+          <li>DEX直接上場・グローバル投資家参加</li>
+          <li>リアルタイムNAV・自動レポーティング実装</li>
+          <li>DAO型ガバナンスファンドの試験運用</li>
+        </ul>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-year">2029 —</div>
+        <div class="phase-badge">Phase 4</div>
+        <div class="phase-title">フルオンチェーン<br>資産運用</div>
+        <ul class="phase-items">
+          <li>AI自律エージェントによる完全自動運用</li>
+          <li>DAO議決権行使プラットフォーム運営</li>
+          <li>CBDC決済対応ファンド展開</li>
+          <li>クロスボーダーRWAファンド国際展開</li>
+          <li>委託会社×信託銀行のDeFiハイブリッド完成</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="conclusion-box">
+      <div class="conclusion-label">Conclusion</div>
+      <p class="conclusion-text">
+        DeFi時代において委託会社（運用会社）が生き残るには、
+        <strong>「投資哲学の唯一の担い手」というポジションを強化</strong>しながら、
+        オペレーションをスマートコントラクトに委ねることで人的リソースを戦略領域に集中させることが重要である。
+        信託銀行との関係は「委託・受託」という垂直統合から、
+        <strong>「戦略設計（AM） × 法的信認・保管（信託銀行） × 自動執行（スマートコントラクト）」という水平協働構造</strong>へと再編される。
+        この新たなトライアングルを先んじて設計した委託会社が、
+        2030年代の資産運用業界における「不可欠なアーキテクト」となりうる。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">Future Finance Analysis</div>
+    <div class="footer-right">
+      DeFi × 委託会社（運用会社）戦略<br>
+      February 2026 | For Discussion Purposes Only
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
